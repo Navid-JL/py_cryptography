@@ -19,3 +19,17 @@ class CaesarCipher():
                 encrypted_message += f"{cls.alphabet[(letter_index + key) % alphabet_length]}"
 
         return encrypted_message.title()
+
+    def decrypt(cls, encrypted_message: str, key: int):
+        decrypted_message = ""
+        alphabet_length = len(cls.alphabet)
+        for letter in encrypted_message.upper():
+            if letter == " ":
+                encrypted_message += " "
+            elif letter.isnumeric():
+                raise ValueError("Caesar Cipher only applies to letters")
+            else:
+                letter_index = cls.alphabet.index(letter)
+                decrypted_message += f"{cls.alphabet[(letter_index - key) % alphabet_length]}"
+
+        return decrypted_message.title()
