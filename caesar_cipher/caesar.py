@@ -2,7 +2,23 @@ from string import ascii_uppercase
 
 
 class CaesarCipher():
+    """A class implementing the Caesar Cipher encryption and decryption methods.
 
+    Attributes:
+    - alphabet (list): A list containing the uppercase letters of the English alphabet.
+
+    Methods:
+    - encrypt(cls, message: str, key: int) -> str:
+      Encrypts the input message using the Caesar Cipher with the specified key.
+      Returns the encrypted message.
+
+    - decrypt(cls, encrypted_message: str, key: int) -> str:
+      Decrypts the input encrypted message using the Caesar Cipher with the specified key.
+      Returns the decrypted message.
+
+    Note:
+    - The class methods do not support numeric characters, and attempting to encrypt or decrypt a message containing numeric characters will raise a ValueError.
+    """
     alphabet = list(ascii_uppercase)
 
     @classmethod
