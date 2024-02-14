@@ -1,26 +1,24 @@
-import pprint
+# mypy: disable-error-code="import-untyped"
 import pyperclip
-from simple_substitution.simple_sub_breaker import decryptWithCipherletterMapping, hackSimpleSub
+from vigenere_cipher.vigenere import VigenereCipher
 
 
 def main() -> None:
-    message = 'Sy l nlx sr pyyacao l ylwj eiswi upar lulsxrj isr sxrjsxwjr, ia esmm rwctjsxsza sj wmpramh, lxo txmarr jia aqsoaxwa sr pqaceiamnsxu, ia esmm caytra jp famsaqa sj. Sy, px jia pjiac ilxo, ia sr pyyacao rpnajisxu eiswi lyypcor l calrpx ypc lwjsxu sx lwwpcolxwa jp isr sxrjsxwjr, ia esmm lwwabj sj aqax px jia rmsuijarj aqsoaxwa. Jia pcsusx py nhjir sr agbmlsxao sx jisr elh. -Facjclxo Ctrramm'
+    # This text can be copy/pasted from https://invpy.com/vigenereCipher.py:
+    message = """Alan Mathison Turing was a British mathematician, logician, cryptanalyst, and computer scientist."""
+    key = 'ASIMOV'
+    mode = 'encrypt'  # Set to either 'encrypt' or 'decrypt'.
 
-    # Determine the possible valid ciphertext translations.
-    print('Hacking...')
-    letterMapping = hackSimpleSub(message)
+    if mode == 'encrypt':
+        translated = VigenereCipher.encrypt(message, key)
+    elif mode == 'decrypt':
+        translated = VigenereCipher.decrypt(message, key)
 
-    # Display the results to the user.
-    print('Mapping:')
-    pprint.pprint(letterMapping)
+    print('%sed message:' % (mode.title()))
+    print(translated)
+    pyperclip.copy(translated)
     print()
-    print('Original ciphertext:')
-    print(message)
-    print()
-    print('Copying hacked message to clipboard:')
-    hackedMessage = decryptWithCipherletterMapping(message, letterMapping)
-    pyperclip.copy(hackedMessage)
-    print(hackedMessage)
+    print('The message has been copied to the clipboard.')
 
 
 if __name__ == '__main__':
