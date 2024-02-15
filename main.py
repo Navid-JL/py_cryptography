@@ -1,24 +1,22 @@
-# mypy: disable-error-code="import-untyped"
-import pyperclip
-from vigenere_cipher.vigenere import VigenereCipher
+import time
 
 
 def main() -> None:
-    # This text can be copy/pasted from https://invpy.com/vigenereCipher.py:
-    message = """Alan Mathison Turing was a British mathematician, logician, cryptanalyst, and computer scientist."""
-    key = 'ASIMOV'
-    mode = 'encrypt'  # Set to either 'encrypt' or 'decrypt'.
 
-    if mode == 'encrypt':
-        translated = VigenereCipher.encrypt(message, key)
-    elif mode == 'decrypt':
-        translated = VigenereCipher.decrypt(message, key)
+    startTime = time.time()
+    for trial in range(10_000):
+        building_str = ''
+        for i in range(10_000):
+            building_str += 'x'
+    print('String concatenation: ', (time.time() - startTime))
 
-    print('%sed message:' % (mode.title()))
-    print(translated)
-    pyperclip.copy(translated)
-    print()
-    print('The message has been copied to the clipboard.')
+    startTime = time.time()
+    for trial in range(10_000):
+        building_list = []
+        for i in range(10_000):
+            building_list.append('x')
+        building_str = ''.join(building_list)
+    print('List appending: ', (time.time() - startTime))
 
 
 if __name__ == '__main__':
